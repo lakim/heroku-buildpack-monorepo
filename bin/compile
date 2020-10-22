@@ -14,6 +14,13 @@ if [ ! -f "${ENV_DIR}/APP_BASE" ]; then
 fi
 APP_BASE="$(cat "${ENV_DIR}/APP_BASE")"
 
+echo "\${BUILD_DIR}"
+echo "${BUILD_DIR}"
+echo "\${APP_BASE}"
+echo "${APP_BASE}"
+echo "\${STAGE}"
+echo "${STAGE}"
+
 (
     mv "${BUILD_DIR}/${APP_BASE}" "${STAGE}" &&
     rm -rf "${BUILD_DIR}" &&
@@ -26,4 +33,3 @@ if [ $? -ne 0 ]; then
 fi
 
 echo "Copied ${APP_BASE} to root of app successfully" | indent
-
