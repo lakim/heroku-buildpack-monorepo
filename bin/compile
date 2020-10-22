@@ -20,6 +20,8 @@ echo "\${APP_BASE}"
 echo "${APP_BASE}"
 echo "\${STAGE}"
 echo "${STAGE}"
+echo "ls -la ${BUILD_DIR}"
+ls -la ${BUILD_DIR}
 
 (
     mv "${BUILD_DIR}/${APP_BASE}" "${STAGE}" &&
