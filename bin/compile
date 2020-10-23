@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+shopt -s dotglob
+
 indent() {
     sed -u 's/^/      /'
 }
@@ -24,14 +26,16 @@ echo "ls -la ${BUILD_DIR}"
 ls -la ${BUILD_DIR}
 
 (
-    mv "${BUILD_DIR}/${APP_BASE}" "${STAGE}" &&
-    rm -rf "${BUILD_DIR}" &&
-    mv "${STAGE}/$(basename "$APP_BASE")" "${BUILD_DIR}"
+    mv "${BUILD_DIR}/*" "${STAGE}" &&
+    mv "${STAGE}" "${BUILD_DIR}/monorepo" &&
+    mv "${BUILD_DIR}/monorepo/${APP_BASE}/*" "${BUILD_DIR}"
 )
 
 if [ $? -ne 0 ]; then
     echo "FAILED to copy directory into place" | indent
     exit 1
 fi
+
+tree -L 2
 
 echo "Copied ${APP_BASE} to root of app successfully" | indent
